@@ -80,7 +80,6 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL, -- store bcrypt hash
     role_id INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    
     CONSTRAINT fk_users_role
         FOREIGN KEY (role_id) 
         REFERENCES roles(id)
@@ -97,13 +96,11 @@ CREATE TABLE tickets (
     created_by INT NOT NULL,
     assigned_to INT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
     CONSTRAINT fk_tickets_created_by
         FOREIGN KEY (created_by)
         REFERENCES users(id)
         ON DELETE RESTRICT
         ON UPDATE CASCADE,
-
     CONSTRAINT fk_tickets_assigned_to
         FOREIGN KEY (assigned_to)
         REFERENCES users(id)
@@ -118,13 +115,11 @@ CREATE TABLE ticket_comments (
     user_id INT NOT NULL,
     comment TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
     CONSTRAINT fk_comments_ticket
         FOREIGN KEY (ticket_id)
         REFERENCES tickets(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-
     CONSTRAINT fk_comments_user
         FOREIGN KEY (user_id)
         REFERENCES users(id)
@@ -139,13 +134,11 @@ CREATE TABLE ticket_status_logs (
     new_status ENUM('OPEN','IN_PROGRESS','RESOLVED','CLOSED') NOT NULL,
     changed_by INT NOT NULL,
     changed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
     CONSTRAINT fk_status_ticket
         FOREIGN KEY (ticket_id)
         REFERENCES tickets(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-
     CONSTRAINT fk_status_changed_by
         FOREIGN KEY (changed_by)
         REFERENCES users(id)
