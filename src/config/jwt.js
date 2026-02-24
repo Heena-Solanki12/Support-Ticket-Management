@@ -1,4 +1,4 @@
 module.exports = {
-    secret: process.env.JWT_SECRET,
-    expireIn: '1d'
+  secret: process.env.JWT_SECRET,
+  expiresIn: process.env.JWT_EXPIRES_IN
 };

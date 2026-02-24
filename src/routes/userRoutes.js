@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const auth = require('../middleware/authMiddleware');
 const role = require('../middleware/roleMiddleware');
-const { createUser, getUSers } = require('../controllers/userController');
+const userController = require('../controllers/userController');
 
-router.post('/', auth, role('MANAGER'), createUser);
+router.post('/', auth, role('MANAGER'), userController.createUser);
 
-router.get('/', auth, role('MANAGER'), getUSers);
+router.get('/', auth, role('MANAGER'), userController.getUsers);
 
 module.exports = router;
